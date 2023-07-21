@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "xIN4eYMQtq4E69oKIocJoQIkukx0Eevx2m4IbLot7qPZkMBGrBBOgUHyusQjE2X8AIGkiEP1t6q2+k+MyCV+xg==",
+  "success": false,
+  "projectFilePath": "E:\\projects\\csharp\\BisUtils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ryann\\.nuget\\packages\\mono.options\\6.12.0.148\\mono.options.6.12.0.148.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\serilog\\3.0.2-dev-02044\\serilog.3.0.2-dev-02044.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\serilog.sinks.console\\4.1.1-dev-00910\\serilog.sinks.console.4.1.1-dev-00910.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Unable to find project 'E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj'. Check that the project reference is valid and that the project file exists.",
+      "libraryId": "E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
+}
