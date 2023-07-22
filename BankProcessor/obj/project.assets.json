@@ -73,6 +73,21 @@
           "bin/placeholder/BisUtils.Core.dll": {}
         }
       },
+      "BisUtils.DZConfig/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "BisUtils.Core": "1.0.0",
+          "BisUtils.Param": "1.0.0",
+          "BisUtils.PreProcessor.RV": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BisUtils.DZConfig.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BisUtils.DZConfig.dll": {}
+        }
+      },
       "BisUtils.Param/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -225,6 +240,11 @@
       "path": "../../../src/BisUtils.Core/BisUtils.Core.csproj",
       "msbuildProject": "../../../src/BisUtils.Core/BisUtils.Core.csproj"
     },
+    "BisUtils.DZConfig/1.0.0": {
+      "type": "project",
+      "path": "../../../src/BisUtils.DZConfig/BisUtils.DZConfig.csproj",
+      "msbuildProject": "../../../src/BisUtils.DZConfig/BisUtils.DZConfig.csproj"
+    },
     "BisUtils.Param/1.0.0": {
       "type": "project",
       "path": "../../../src/BisUtils.Param/BisUtils.Param.csproj",
@@ -249,10 +269,10 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "BisUtils.Core >= 1.0.0",
+      "BisUtils.DZConfig >= 1.0.0",
       "BisUtils.Param >= 1.0.0",
       "BisUtils.PreProcessor.RV >= 1.0.0",
       "BisUtils.RVBank >= 1.0.0",
-      "E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj",
       "FResults >= 1.0.0",
       "Mono.Options >= 6.12.0.148",
       "Serilog >= 3.0.2-dev-02044",
@@ -267,11 +287,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\projects\\csharp\\BisUtils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
+      "projectUniqueName": "E:\\projects\\csharp\\bisutils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
       "projectName": "BankProcessor",
-      "projectPath": "E:\\projects\\csharp\\BisUtils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
+      "projectPath": "E:\\projects\\csharp\\bisutils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
       "packagesPath": "C:\\Users\\ryann\\.nuget\\packages\\",
-      "outputPath": "E:\\projects\\csharp\\BisUtils\\samples\\BankProcessor\\BankProcessor\\obj\\",
+      "outputPath": "E:\\projects\\csharp\\bisutils\\samples\\BankProcessor\\BankProcessor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -294,23 +314,23 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "E:\\projects\\csharp\\BisUtils\\lib\\FResults\\FResults\\FResults.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\lib\\FResults\\FResults\\FResults.csproj"
+            "E:\\projects\\csharp\\bisutils\\lib\\FResults\\FResults\\FResults.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\lib\\FResults\\FResults\\FResults.csproj"
             },
-            "E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj"
+            "E:\\projects\\csharp\\bisutils\\src\\BisUtils.Core\\BisUtils.Core.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\src\\BisUtils.Core\\BisUtils.Core.csproj"
             },
-            "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Core\\BisUtils.Core.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Core\\BisUtils.Core.csproj"
+            "E:\\projects\\csharp\\bisutils\\src\\BisUtils.DZConfig\\BisUtils.DZConfig.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\src\\BisUtils.DZConfig\\BisUtils.DZConfig.csproj"
             },
-            "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Param\\BisUtils.Param.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Param\\BisUtils.Param.csproj"
+            "E:\\projects\\csharp\\bisutils\\src\\BisUtils.Param\\BisUtils.Param.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\src\\BisUtils.Param\\BisUtils.Param.csproj"
             },
-            "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.PreProcessor.RV\\BisUtils.PreProcessor.RV.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.PreProcessor.RV\\BisUtils.PreProcessor.RV.csproj"
+            "E:\\projects\\csharp\\bisutils\\src\\BisUtils.PreProcessor.RV\\BisUtils.PreProcessor.RV.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\src\\BisUtils.PreProcessor.RV\\BisUtils.PreProcessor.RV.csproj"
             },
-            "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.RVBank\\BisUtils.RVBank.csproj": {
-              "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.RVBank\\BisUtils.RVBank.csproj"
+            "E:\\projects\\csharp\\bisutils\\src\\BisUtils.RVBank\\BisUtils.RVBank.csproj": {
+              "projectPath": "E:\\projects\\csharp\\bisutils\\src\\BisUtils.RVBank\\BisUtils.RVBank.csproj"
             }
           }
         }
@@ -361,16 +381,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Unable to find project 'E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj'. Check that the project reference is valid and that the project file exists.",
-      "libraryId": "E:\\projects\\csharp\\BisUtils\\samples\\src\\BisUtils.All\\BisUtils.All.csproj",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    }
-  ]
+  }
 }

@@ -17,10 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\lib\FResults\FResults\FResults.csproj" />
     <ProjectReference Include="..\..\..\src\BisUtils.Core\BisUtils.Core.csproj" />
+    <ProjectReference Include="..\..\..\src\BisUtils.DZConfig\BisUtils.DZConfig.csproj" />
     <ProjectReference Include="..\..\..\src\BisUtils.Param\BisUtils.Param.csproj" />
     <ProjectReference Include="..\..\..\src\BisUtils.PreProcessor.RV\BisUtils.PreProcessor.RV.csproj" />
     <ProjectReference Include="..\..\..\src\BisUtils.RVBank\BisUtils.RVBank.csproj" />
-    <ProjectReference Include="..\..\src\BisUtils.All\BisUtils.All.csproj" />
   </ItemGroup>
 
 </Project>

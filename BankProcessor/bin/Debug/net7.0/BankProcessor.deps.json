@@ -1,0 +1,179 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "BankProcessor/1.0.0": {
+        "dependencies": {
+          "BisUtils.Core": "1.0.0",
+          "BisUtils.DZConfig": "1.0.0",
+          "BisUtils.Param": "1.0.0",
+          "BisUtils.PreProcessor.RV": "1.0.0",
+          "BisUtils.RVBank": "1.0.0",
+          "FResults": "1.0.0",
+          "Mono.Options": "6.12.0.148",
+          "Serilog": "3.0.2-dev-02044",
+          "Serilog.Sinks.Console": "4.1.1-dev-00910",
+          "Serilog.Sinks.File": "5.0.1-dev-00947"
+        },
+        "runtime": {
+          "BankProcessor.dll": {}
+        }
+      },
+      "Mono.Options/6.12.0.148": {
+        "runtime": {
+          "lib/netstandard2.0/Mono.Options.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.12.0.0"
+          }
+        }
+      },
+      "Serilog/3.0.2-dev-02044": {
+        "runtime": {
+          "lib/net7.0/Serilog.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "3.0.2.0"
+          }
+        }
+      },
+      "Serilog.Sinks.Console/4.1.1-dev-00910": {
+        "dependencies": {
+          "Serilog": "3.0.2-dev-02044"
+        },
+        "runtime": {
+          "lib/net5.0/Serilog.Sinks.Console.dll": {
+            "assemblyVersion": "4.1.1.0",
+            "fileVersion": "4.1.1.0"
+          }
+        }
+      },
+      "Serilog.Sinks.File/5.0.1-dev-00947": {
+        "dependencies": {
+          "Serilog": "3.0.2-dev-02044"
+        },
+        "runtime": {
+          "lib/net5.0/Serilog.Sinks.File.dll": {
+            "assemblyVersion": "5.0.1.0",
+            "fileVersion": "5.0.1.0"
+          }
+        }
+      },
+      "BisUtils.Core/1.0.0": {
+        "dependencies": {
+          "FResults": "1.0.0"
+        },
+        "runtime": {
+          "BisUtils.Core.dll": {}
+        }
+      },
+      "BisUtils.DZConfig/1.0.0": {
+        "dependencies": {
+          "BisUtils.Core": "1.0.0",
+          "BisUtils.Param": "1.0.0",
+          "BisUtils.PreProcessor.RV": "1.0.0"
+        },
+        "runtime": {
+          "BisUtils.DZConfig.dll": {}
+        }
+      },
+      "BisUtils.Param/1.0.0": {
+        "dependencies": {
+          "BisUtils.Core": "1.0.0",
+          "BisUtils.PreProcessor.RV": "1.0.0"
+        },
+        "runtime": {
+          "BisUtils.Param.dll": {}
+        }
+      },
+      "BisUtils.PreProcessor.RV/1.0.0": {
+        "dependencies": {
+          "BisUtils.Core": "1.0.0"
+        },
+        "runtime": {
+          "BisUtils.PreProcessor.RV.dll": {}
+        }
+      },
+      "BisUtils.RVBank/1.0.0": {
+        "dependencies": {
+          "BisUtils.Core": "1.0.0"
+        },
+        "runtime": {
+          "BisUtils.RVBank.dll": {}
+        }
+      },
+      "FResults/1.0.0": {
+        "runtime": {
+          "FResults.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BankProcessor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Mono.Options/6.12.0.148": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kf6bdXnP4IzqIp4bJ1YKPI3/PAcOV6qm4mznChJ3c92zHQUXTWJSp0+h+Cfcii0O6m/EgW7KA+tbCiB2al0DDA==",
+      "path": "mono.options/6.12.0.148",
+      "hashPath": "mono.options.6.12.0.148.nupkg.sha512"
+    },
+    "Serilog/3.0.2-dev-02044": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Hu+akoisb/A4lOcVmiY3IAfo9Ke0uPyCTvNDJXnpJrV8Am2YCHBC4s+KPlxGWX2qDClFNJBvT+y/TZgN7uAkuA==",
+      "path": "serilog/3.0.2-dev-02044",
+      "hashPath": "serilog.3.0.2-dev-02044.nupkg.sha512"
+    },
+    "Serilog.Sinks.Console/4.1.1-dev-00910": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Lri9i0Vv7MXpLAf5aXq+oBzX/ca5vl+fBAiLtXMJQu9xYyNv++8q+VhzePnOreES4GnwChg6Zrm8ARkVHE/kmA==",
+      "path": "serilog.sinks.console/4.1.1-dev-00910",
+      "hashPath": "serilog.sinks.console.4.1.1-dev-00910.nupkg.sha512"
+    },
+    "Serilog.Sinks.File/5.0.1-dev-00947": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rCxuBUTC4v/Mawa2bCD0CkEODiCIJqQvxZfWmZb9O2W1hcZ77WCrNGw2nKnXCuSII4cuWip9QwWbn9wmLzS5sA==",
+      "path": "serilog.sinks.file/5.0.1-dev-00947",
+      "hashPath": "serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
+    },
+    "BisUtils.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BisUtils.DZConfig/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BisUtils.Param/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BisUtils.PreProcessor.RV/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BisUtils.RVBank/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FResults/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
