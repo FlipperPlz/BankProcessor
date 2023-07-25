@@ -7,18 +7,27 @@ using BisUtils.RVBank.Model;
 using BisUtils.RVBank.Model.Entry;
 using BisUtils.RVBank.Model.Stubs;
 using BisUtils.RVBank.Options;
+using Microsoft.Extensions.Logging.Abstractions;
 using Mono.Options;
 using Serilog;
 using Serilog.Events;
+using Serilog.Extensions.Logging;
 using Serilog.Formatting.Json;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
+
+namespace BankProcessor;
 
 public sealed class Program
 {
-    public static Program Instance = null!;
+    // ReSharper disable once NotAccessedField.Local
+    private static Program instance = null!;
     private static int currentLogLevel = 6;
-    private readonly string inputPath;
-    private readonly RVBankOptions bankOptions;
-    private readonly ParamOptions paramOptions;
+    private static string inputPath = string.Empty;
+    private static string outputPath = string.Empty;
+    private static TimeSpan compressionTimeout = TimeSpan.FromMinutes(1);
+    private static RVBankOptions bankOptions = null!;
+    private static ParamOptions paramOptions = null!;
+    private static ILogger msLogger = NullLogger.Instance;
 
     private readonly IEnumerable<RVBank> banks;
     private readonly Dictionary<IRVBankDataEntry, IDzConfig> modConfigs = new();
@@ -27,7 +36,7 @@ public sealed class Program
     private void ProcessBanks()
     {
         {
-            var configs = LocateConfigEntries(true).ToList();
+            var configs = LocateConfigEntries().ToList();
             if (!configs.Any())
             {
                 Log.Logger.Fatal(
@@ -40,7 +49,7 @@ public sealed class Program
 
     }
 
-    private void ProcessConfigs(IEnumerable<IRVBankDataEntry> configs)
+    private static void ProcessConfigs(IEnumerable<IRVBankDataEntry> configs)
     {
         Log.Logger.Information("Stage 1.1 Starting... (parse configs)");
         foreach (var bankEntry in configs)
@@ -49,7 +58,7 @@ public sealed class Program
             Log.Logger.Information("[{bankName}]: Parsing config file in '{configPath}'...", bankName, bankEntry.AbsolutePath);
             try
             {
-                var file = ParamFile.ReadParamFile("config", bankEntry.EntryData, paramOptions);
+                var file = ParamFile.ReadParamFile("config", bankEntry.EntryData, paramOptions, msLogger);
                 Log.Logger.Information("[{bankName}]: Config file was parsed successfully", bankName);
 
                 var config = new DzConfig(file!);
@@ -99,29 +108,9 @@ public sealed class Program
 
     public static void Main(string[] arguments)
     {
-        var inputPath = string.Empty;
-        var outputPath = string.Empty;
-        var timeout = TimeSpan.FromMinutes(1);
 
-        var commandOptions = new OptionSet()
-            .Add("v", "Increase verbosity", e => --currentLogLevel)
-            .Add("f=|folder=", "Input Folder", s => inputPath = s)
-            .Add("o=|output=", "Output Folder", s => outputPath = s)
-            .Add("dc=|dcTimeout=", "Decompression Timeout (not yet implemented)", (int? it) =>
-            {
-                if (it is { } nnIt)
-                {
-                    timeout = TimeSpan.FromMinutes(nnIt);
-                }
-            });
-        commandOptions.Parse(arguments);
-        var logSink = Path.GetTempFileName();
-#pragma warning disable CA1305
-        Log.Logger = new LoggerConfiguration().WriteTo.Console(outputTemplate:
-                "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}", restrictedToMinimumLevel: (LogEventLevel)currentLogLevel)
-#pragma warning restore CA1305
-            .WriteTo
-            .File(new JsonFormatter(), logSink, restrictedToMinimumLevel: (LogEventLevel)currentLogLevel).CreateLogger();
+        InitializeArguments(arguments);
+        InitializeLogger();
 
         if (!File.Exists(inputPath) && !Directory.Exists(inputPath))
         {
@@ -136,14 +125,22 @@ public sealed class Program
 
         Directory.CreateDirectory(outputPath);
 
-        var options = new RVBankOptions()
+        paramOptions = new ParamOptions
+        {
+            DuplicateClassnameIsError = false,
+            MissingDeleteTargetIsError = false,
+            MissingParentIsError = false,
+            IgnoreValidation = true
+        };
+
+        bankOptions = new RVBankOptions()
         {
             AllowObfuscated = true,
             FlatRead = false,
             RemoveBenignProperties = true,
             AllowMultipleVersion = true,
             IgnoreValidation = true,
-            DecompressionTimeout = timeout!,
+            DecompressionTimeout = compressionTimeout,
             Charset = Encoding.UTF8,
             RequireValidSignature = false,
             RegisterEmptyEntries = false,
@@ -156,42 +153,68 @@ public sealed class Program
             IgnoreInvalidStreamSize = true,
             AlwaysSeparateOnDummy = true,
             AllowUnnamedDataEntries = true,
-            AllowDuplicateFileNames = true,
+            IgnoreDuplicateFiles = true,
             RespectEntryOffsets = false,
             WriteValidOffsets = false,
             AsciiLengthTimeout = 510,
             AllowEncrypted = true
         };
 
-        Instance = Directory.Exists(inputPath) ? new Program(DiscoverBanks(inputPath, outputPath, options), inputPath) : new Program(new[] { RVBank.ReadPbo(inputPath, options, syncTo: null) }, inputPath) ;
+        instance = Directory.Exists(inputPath) ? new Program(DiscoverBanks()) : new Program(new[] { RVBank.ReadPbo(inputPath, bankOptions, syncTo: null, msLogger) }) ;
     }
 
-    private static IEnumerable<RVBank> DiscoverBanks(string inputPath, string outputPath, RVBankOptions options) =>
-        Directory.EnumerateFiles(inputPath, "*.pbo", SearchOption.AllDirectories).Select(it => RVBank.ReadPbo(it, options, null));
+    private static void InitializeArguments(string[] arguments)
+    {
+        var commandOptions = new OptionSet()
+            .Add("v", "Increase verbosity",_ => --currentLogLevel)
+            .Add("f=|folder=", "Input Folder", s => inputPath = s)
+            .Add("o=|output=", "Output Folder", s => outputPath = s)
+            .Add("dc=|dcTimeout=", "Decompression Timeout (not yet implemented)", (int? it) =>
+            {
+                if (it is { } nnIt)
+                {
+                    compressionTimeout = TimeSpan.FromMinutes(nnIt);
+                }
+            });
+        commandOptions.Parse(arguments);
+    }
 
-    private Program(IEnumerable<RVBank> banks, string inputPath)
+    private static void InitializeLogger()
+    {
+        var logSink = Path.GetTempFileName();
+#pragma warning disable CA1305
+        Log.Logger = new LoggerConfiguration().WriteTo.Console(outputTemplate:
+                "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}", restrictedToMinimumLevel: (LogEventLevel)currentLogLevel)
+#pragma warning restore CA1305
+            .WriteTo
+            .File(new JsonFormatter(), logSink, restrictedToMinimumLevel: (LogEventLevel)currentLogLevel).CreateLogger();
+
+
+        msLogger = new SerilogLoggerFactory().CreateLogger("Program");
+    }
+
+    private static IEnumerable<RVBank> DiscoverBanks() =>
+        Directory.EnumerateFiles(inputPath, "*.pbo", SearchOption.AllDirectories).Select(it => RVBank.ReadPbo(it, bankOptions, null, msLogger));
+
+    private Program(IEnumerable<RVBank> banks)
     {
         this.banks = banks;
-        this.inputPath = inputPath;
-        paramOptions = new ParamOptions()
-        {
-            DuplicateClassnameIsError = false,
-            MissingDeleteTargetIsError = false,
-            MissingParentIsError = false,
-            IgnoreValidation = true
-        };
+
 
         ProcessBanks();
     }
 
-    private void Dump(Stream data, bool crash = true)
+    private static void Dump(Stream data, bool crash = true)
     {
         Log.Logger.Information("Fatal error parsing parsing config.");
         using var binaryReader = new BinaryReader(data);
         var bytes = binaryReader.ReadBytes((int)data.Length);
 
         Log.Logger.Information(Encoding.UTF8.GetString(bytes));
-        if(crash) Environment.Exit(999);
+        if(crash)
+        {
+            Environment.Exit(999);
+        }
     }
 
 }

@@ -1,11 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "7JtxWWnoGW2rQIAK9l2rs/Z65Nm++eU5O64LfRujbsLbxDp4RnUuuSS5owkiN6ck0x4biYJq+Lqjn4si5M9X1Q==",
+  "dgSpecHash": "XMjMtSPgR5MG9NRaThbtC6rSffYFn0EixvAT73wYpNxly5RF0ng/joxWWfXMw9gcM12NHfSl7cMwe3iwkanWOA==",
   "success": true,
-  "projectFilePath": "E:\\projects\\csharp\\bisutils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
+  "projectFilePath": "E:\\projects\\csharp\\BisUtils\\samples\\BankProcessor\\BankProcessor\\BankProcessor.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0-preview.6.23329.7\\microsoft.extensions.dependencyinjection.abstractions.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0-preview.6.23329.7\\microsoft.extensions.logging.abstractions.8.0.0-preview.6.23329.7.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\ryann\\.nuget\\packages\\mono.options\\6.12.0.148\\mono.options.6.12.0.148.nupkg.sha512",
     "C:\\Users\\ryann\\.nuget\\packages\\serilog\\3.0.2-dev-02044\\serilog.3.0.2-dev-02044.nupkg.sha512",
+    "C:\\Users\\ryann\\.nuget\\packages\\serilog.extensions.logging\\7.0.0\\serilog.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\ryann\\.nuget\\packages\\serilog.sinks.console\\4.1.1-dev-00910\\serilog.sinks.console.4.1.1-dev-00910.nupkg.sha512",
     "C:\\Users\\ryann\\.nuget\\packages\\serilog.sinks.file\\5.0.1-dev-00947\\serilog.sinks.file.5.0.1-dev-00947.nupkg.sha512"
   ],

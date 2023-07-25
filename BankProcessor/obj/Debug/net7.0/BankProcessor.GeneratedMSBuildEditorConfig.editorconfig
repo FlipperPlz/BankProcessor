@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BankProcessor
-build_property.ProjectDir = E:\projects\csharp\bisutils\samples\BankProcessor\BankProcessor\
+build_property.ProjectDir = E:\projects\csharp\BisUtils\samples\BankProcessor\BankProcessor\
