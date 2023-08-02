@@ -218,6 +218,20 @@
           "bin/placeholder/BisUtils.DZConfig.dll": {}
         }
       },
+      "BisUtils.Extensions.RVBank.DzConfigExtensions/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "BisUtils.DZConfig": "1.0.0",
+          "BisUtils.RVBank": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BisUtils.Extensions.RVBank.DzConfigExtensions.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BisUtils.Extensions.RVBank.DzConfigExtensions.dll": {}
+        }
+      },
       "BisUtils.Param/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -615,6 +629,11 @@
       "path": "../../../src/BisUtils.DZConfig/BisUtils.DZConfig.csproj",
       "msbuildProject": "../../../src/BisUtils.DZConfig/BisUtils.DZConfig.csproj"
     },
+    "BisUtils.Extensions.RVBank.DzConfigExtensions/1.0.0": {
+      "type": "project",
+      "path": "../../../src/BisUtils.Extensions.RVBank.DzConfigExtensions/BisUtils.Extensions.RVBank.DzConfigExtensions.csproj",
+      "msbuildProject": "../../../src/BisUtils.Extensions.RVBank.DzConfigExtensions/BisUtils.Extensions.RVBank.DzConfigExtensions.csproj"
+    },
     "BisUtils.Param/1.0.0": {
       "type": "project",
       "path": "../../../src/BisUtils.Param/BisUtils.Param.csproj",
@@ -640,6 +659,7 @@
     "net7.0": [
       "BisUtils.Core >= 1.0.0",
       "BisUtils.DZConfig >= 1.0.0",
+      "BisUtils.Extensions.RVBank.DzConfigExtensions >= 1.0.0",
       "BisUtils.Param >= 1.0.0",
       "BisUtils.PreProcessor.RV >= 1.0.0",
       "BisUtils.RVBank >= 1.0.0",
@@ -693,6 +713,9 @@
             },
             "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.DZConfig\\BisUtils.DZConfig.csproj": {
               "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.DZConfig\\BisUtils.DZConfig.csproj"
+            },
+            "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Extensions.RVBank.DzConfigExtensions\\BisUtils.Extensions.RVBank.DzConfigExtensions.csproj": {
+              "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Extensions.RVBank.DzConfigExtensions\\BisUtils.Extensions.RVBank.DzConfigExtensions.csproj"
             },
             "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Param\\BisUtils.Param.csproj": {
               "projectPath": "E:\\projects\\csharp\\BisUtils\\src\\BisUtils.Param\\BisUtils.Param.csproj"

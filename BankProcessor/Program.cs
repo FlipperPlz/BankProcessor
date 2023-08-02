@@ -2,10 +2,8 @@
 using BisUtils.DZConfig;
 using BisUtils.Param.Models;
 using BisUtils.Param.Options;
-using BisUtils.RVBank.Extensions;
 using BisUtils.RVBank.Model;
 using BisUtils.RVBank.Model.Entry;
-using BisUtils.RVBank.Model.Stubs;
 using BisUtils.RVBank.Options;
 using Microsoft.Extensions.Logging.Abstractions;
 using Mono.Options;
@@ -16,6 +14,9 @@ using Serilog.Formatting.Json;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace BankProcessor;
+
+using BisUtils.Extensions.RVBank.DzConfigExtensions;
+using BisUtils.RVBank.Extensions;
 
 public sealed class Program
 {
@@ -83,27 +84,18 @@ public sealed class Program
     {
         Log.Logger.Information("Stage 1: Starting config scan on {bankCount} bank(s)", banks.Count());
 
-        var dirs = new Dictionary<IRVBankDirectory, IRVBankDataEntry>();
+        var configFiles = new List<IRVBankDataEntry>();
 
         foreach (var bank in banks)
         {
-
-
             Log.Logger.Information("Scanning bank {bankPath} ({bankPrefix}) for config files.", bank.FileName, bank.BankPrefix);
-            foreach (var binnedConfig in bank.GetFileEntries("config.bin", true))
-            {
-                Log.Logger.Information("[{bankName}] Located binarized addon config entry at '{cfgPath}' under prefix {bankPrefix}", bank.FileName, binnedConfig.AbsolutePath, bank.BankPrefix);
-                dirs[binnedConfig.ParentDirectory] = binnedConfig;
-            }
+            var found = bank.LocateConfigEntries(SearchOption.AllDirectories).ToList();
+            Log.Logger.Information("Located {cfgCount} config(s)", found.Count);
 
-            foreach (var config in bank.GetFileEntries("config.cpp", true))
-            {
-                Log.Logger.Information("[{bankName}] Located addon config entry at '{cfgPath}' under prefix {bankPrefix}", bank.FileName, config.AbsolutePath, bank.BankPrefix);
-                dirs[config.ParentDirectory] = config;
-            }
+            configFiles.AddRange(found);
         }
-        Log.Logger.Information("Config scanning has been completed for banks. {configCount} config(s) were found in {modCount}", dirs.Count, banks.Count());
-        return new List<IRVBankDataEntry>(dirs.Values);
+        Log.Logger.Information("Config scanning has been completed for banks. {configCount} config(s) were found in {modCount}", configFiles.Count, banks.Count());
+        return configFiles;
     }
 
     public static void Main(string[] arguments)
@@ -156,11 +148,11 @@ public sealed class Program
             IgnoreDuplicateFiles = true,
             RespectEntryOffsets = false,
             WriteValidOffsets = false,
-            AsciiLengthTimeout = 510,
+            AsciiLengthTimeout = 1023,
             AllowEncrypted = true
         };
 
-        instance = Directory.Exists(inputPath) ? new Program(DiscoverBanks()) : new Program(new[] { RVBank.ReadPbo(inputPath, bankOptions, syncTo: null, msLogger) }) ;
+        instance = Directory.Exists(inputPath) ? new Program(DiscoverBanks()) : new Program(new[] { new RVBank(inputPath, bankOptions, syncTo: null, msLogger) }) ;
     }
 
     private static void InitializeArguments(string[] arguments)
@@ -194,7 +186,7 @@ public sealed class Program
     }
 
     private static IEnumerable<RVBank> DiscoverBanks() =>
-        Directory.EnumerateFiles(inputPath, "*.pbo", SearchOption.AllDirectories).Select(it => RVBank.ReadPbo(it, bankOptions, null, msLogger));
+        Directory.EnumerateFiles(inputPath, "*.pbo", SearchOption.AllDirectories).Select(it => new RVBank(it, bankOptions, null, msLogger));
 
     private Program(IEnumerable<RVBank> banks)
     {
